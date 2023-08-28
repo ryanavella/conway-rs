@@ -1,3 +1,4 @@
+#![warn(clippy::pedantic)]
 //! Conway's Game of Life, in Rust.
 use std::io::{stdout, Write};
 use std::thread;
@@ -72,10 +73,13 @@ fn main() -> Result<()> {
             }
         }
 
-        let diff = 100_000_000 - (tick_beg.elapsed().as_nanos() as i128);
+        let elapsed = tick_beg.elapsed().as_nanos();
+        let diff = 100_000_000_u128.checked_sub(elapsed);
 
-        if diff > 0 {
-            thread::sleep(time::Duration::new(0, diff as u32))
+        if let Some(diff) = diff {
+            let diff = diff.try_into().unwrap();
+            let duration = time::Duration::new(0, diff);
+            thread::sleep(duration)
         }
     }
 }
