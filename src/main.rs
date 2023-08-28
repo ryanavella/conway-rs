@@ -25,8 +25,8 @@ fn main() -> Result<()> {
 
     stdout.queue(terminal::Clear(terminal::ClearType::All))?;
     for y in 1..(board.len() - 1) {
-        for x in 1..(board.len() - 1) {
-            if board[x][y] == 1 {
+        for (x, col) in board.iter().enumerate().take(board.len() - 1).skip(1) {
+            if col[y] == 1 {
                 stdout
                     .queue(cursor::MoveTo(x as u16, y as u16))?
                     .queue(style::PrintStyledContent("█".white()))?;
