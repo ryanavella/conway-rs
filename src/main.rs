@@ -27,8 +27,10 @@ fn main() -> Result<()> {
     for y in 1..(board.len() - 1) {
         for (x, col) in board.iter().enumerate().take(board.len() - 1).skip(1) {
             if col[y] == 1 {
+                let x = x.try_into().unwrap();
+                let y = y.try_into().unwrap();
                 stdout
-                    .queue(cursor::MoveTo(x as u16, y as u16))?
+                    .queue(cursor::MoveTo(x, y))?
                     .queue(style::PrintStyledContent("█".white()))?;
             }
         }
