@@ -1,8 +1,9 @@
 [package]
-name = "sandbox"
-version = "0.0.0"
+name = "conway"
+version = "0.1.0"
 authors = ["Ryan Avella"]
-edition = "2018"
+edition = "2021"
+publish = false
 
 [dependencies]
 crossterm = "0.13"
