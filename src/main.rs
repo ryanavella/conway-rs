@@ -1,5 +1,4 @@
 //! Conway's Game of Life, in Rust.
-
 use std::io::{stdout, Write};
 use std::thread;
 use std::time;
