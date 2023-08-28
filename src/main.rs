@@ -52,15 +52,19 @@ fn main() -> Result<()> {
                     + board_old[y + 1][x + 1];
                 board[y][x] = if sum == 3 || (sum == 2 && board[y][x] == 1) {
                     if board_old[y][x] == 0 {
+                        let x = x.try_into().unwrap();
+                        let y = y.try_into().unwrap();
                         stdout
-                            .queue(cursor::MoveTo(x as u16, y as u16))?
+                            .queue(cursor::MoveTo(x, y))?
                             .queue(style::PrintStyledContent("█".white()))?;
                     }
                     1
                 } else {
                     if board_old[y][x] == 1 {
+                        let x = x.try_into().unwrap();
+                        let y = y.try_into().unwrap();
                         stdout
-                            .queue(cursor::MoveTo(x as u16, y as u16))?
+                            .queue(cursor::MoveTo(x, y))?
                             .queue(style::PrintStyledContent(" ".white()))?;
                     }
                     0
