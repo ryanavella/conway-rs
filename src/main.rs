@@ -37,6 +37,8 @@ fn main() -> Result<()> {
     }
 
     loop {
+        const LOOP_MILLIS: u128 = 100;
+
         let tick_beg = time::Instant::now();
         stdout.flush()?;
 
@@ -73,12 +75,12 @@ fn main() -> Result<()> {
             }
         }
 
-        let elapsed = tick_beg.elapsed().as_nanos();
-        let diff = 100_000_000_u128.checked_sub(elapsed);
+        let elapsed = tick_beg.elapsed().as_millis();
+        let diff = LOOP_MILLIS.checked_sub(elapsed);
 
         if let Some(diff) = diff {
             let diff = diff.try_into().unwrap();
-            let duration = time::Duration::new(0, diff);
+            let duration = time::Duration::from_millis(diff);
             thread::sleep(duration)
         }
     }
